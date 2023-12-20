@@ -62,7 +62,8 @@ namespace CameraToggleReloaded.Handler
             _twitchPubSubServiceManager = _twitchService.GetPubSubService();
             _twitchPubSubServiceManager.OnRewardRedeemed += TwitchPubSubServiceManagerOnOnRewardRedeemed;
             
-            SceneManager.activeSceneChanged += SceneManagerOnActiveSceneChanged;
+            // we need scene change here too, should be its own handler
+            //SceneManager.activeSceneChanged += SceneManagerOnActiveSceneChanged;
             SceneManager.sceneLoaded += SceneManagerOnSceneLoaded;
         }
 
@@ -81,6 +82,7 @@ namespace CameraToggleReloaded.Handler
             }
 
             _instance.StopAllServices();
+            SceneManager.sceneLoaded -= SceneManagerOnSceneLoaded;
         }
 
         private void OnTextMessageReceived(MultiplexedPlatformService service, MultiplexedMessage message)
@@ -279,44 +281,21 @@ namespace CameraToggleReloaded.Handler
             _globalCooldown = nextPossibleTrigger;
         }
         
-        private void SceneManagerOnActiveSceneChanged(Scene oldScene, Scene newScene)
-        {
-            /*
-            _siraLog.Debug(newScene.name);
-            if (newScene.name == "EmptyTransition" || newScene.name == "ShaderWarmup" || newScene.name == "ShaderWarmup")
-            {
-                _currentGameType = ReloadedGameType.Menu;
-                return;
-            }
-
-            _currentGameType = newScene.name == "GameCore" ? ReloadedGameType.Solo : ReloadedGameType.Menu;
-            if (_currentGameType == ReloadedGameType.Menu && !ReloadedHelper.MenuSceneNames.Contains(newScene.name))
-            {
-                _currentGameType = ReloadedGameType.Multi;
-            }
-            */
-        }
-        
         private void SceneManagerOnSceneLoaded(Scene scene, LoadSceneMode _)
         {
-            if (scene.name == "EmptyTransition")
+            if (scene.name == "EmptyTransition" || scene.name == "ShaderWarmup")
             {
                 return;
             }
-            _siraLog.Debug(scene.name);
-            /*
-            if (_currentGameType == ReloadedGameType.Menu || !_lateToggleSet || _lateToggle == null)
+            
+            // detect switch back to menu and if auto switch is active to reset scene to default
+            if (
+                ReloadedHelper.IsAutoSwitchActivated
+                && ReloadedHelper.CurrentScene != ReloadedHelper.DefaultSceneName 
+                && (ReloadedHelper.CurrentSceneType == SceneTypes.Menu || ReloadedHelper.CurrentSceneType == SceneTypes.FPFC))
             {
-                return;
+                ReloadedHelper.ResetCurrentScene();
             }
-
-            UnityMainThreadTaskScheduler.Factory.StartNew(() =>
-            {
-                SwitchToScene(_lateToggle.Item1, _lateToggle.Item2, true);
-                _lateToggle = null;
-                _lateToggleSet = false;
-            }).ConfigureAwait(false);
-            */
         }
     }
 }

@@ -16,7 +16,7 @@ namespace CameraToggleReloaded.Handler
 
         public MenuButtonHandler(MainFlowCoordinator mainFlowCoordinator, ReloadedFlowCoordinator reloadedFlowCoordinator)
         {
-            _menuButton = new MenuButton("CameraToggle Reloaded", "It is finally back", MenuButtonClick);
+            _menuButton = new MenuButton("CameraToggle Reloaded", "It's finally back!", MenuButtonClick);
             _mainFlowCoordinator = mainFlowCoordinator;
             _flowCoordinator = reloadedFlowCoordinator;
         }

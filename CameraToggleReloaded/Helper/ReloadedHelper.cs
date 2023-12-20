@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using Camera2.Configuration;
 using CameraToggleReloaded.Configuration;
 using IPA.Loader;
+using IPA.Utilities;
 using IPA.Utilities.Async;
+using Newtonsoft.Json;
 
 namespace CameraToggleReloaded.Helper
 {
@@ -13,6 +16,8 @@ namespace CameraToggleReloaded.Helper
     {
         private static bool? _catCoreInstalled;
         private static bool? _camera2Installed;
+        private static string? _camera2ScenesConfigFile;
+        private static bool _camera2ScenesConfigFileExist;
 
         public const string DefaultSceneName = "default";
         public static string CurrentScene { get; private set; } = DefaultSceneName;
@@ -84,11 +89,30 @@ namespace CameraToggleReloaded.Helper
             }).ConfigureAwait(false);
         }
 
-        public static bool IsAutoSwitchActivated()
+        public static void ResetCurrentScene()
         {
-            // load scene json
-            // return autoswitchFromCustom value
-            return true;
+            CurrentScene = DefaultSceneName;
+        }
+
+        public static bool IsAutoSwitchActivated
+        {
+            get
+            {
+                if (_camera2ScenesConfigFile == null)
+                {
+                    _camera2ScenesConfigFile = Path.Combine(UnityGame.UserDataPath, "Camera2", "Scenes.json");
+                    _camera2ScenesConfigFileExist = File.Exists(_camera2ScenesConfigFile);
+                }
+                
+                if (_camera2ScenesConfigFileExist)
+                {
+                    var peeker = JsonConvert.DeserializeObject<ReloadedScenePeeker>(File.ReadAllText(_camera2ScenesConfigFile));
+                    return peeker.AutoSwitchFromCustom;
+                }
+                
+                Plugin.Logger.Error("Scenes.json file missing in Camera2, assuming default value false");
+                return false;
+            }
         }
     }
 }

@@ -16,12 +16,14 @@ namespace CameraToggleReloaded
     public class Plugin
     {
         internal static string Version { get; private set; } = null!;
+        internal static Logger Logger { get; private set; } = null!;
         
         [Init]
         [UsedImplicitly]
         public void Init(Config config, PluginMetadata metadata, Logger logger, Zenjector zenjector)
         {
             Version = metadata.HVersion.ToString();
+            Logger = logger;
             
             zenjector.UseLogger(logger);
             zenjector.UseMetadataBinder<Plugin>();

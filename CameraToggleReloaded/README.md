@@ -29,9 +29,12 @@ However it is controlled either by you or your chat!
 - independent cam to scene assignment (basically on-the-fly scene creation)
 
 ## Special Thanks
-- [FEFELAND](https://www.twitch.tv/fefeland) for providing many scenes to test with and for his testing help
+- [FEFELAND](https://www.twitch.tv/fefeland) for providing many scenes to test with and for general testing
 
 ## Changelog
+- 20231221 - 0.2.1
+  - fixed scene not being toggled twice after menu break when auto switch was enabled on Camera2
+  - fixed scene load event was not correctly removed when disposed
 - 20231212 - 0.2.0
   - added scene game mode override
   - fixed scene select which is currently in use
