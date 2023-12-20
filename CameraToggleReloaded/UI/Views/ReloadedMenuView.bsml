@@ -1,0 +1,57 @@
+<bg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+    <vertical child-control-height="false" child-expand-height="false">
+        <tab-selector tab-tag="ctrtabs" id="tabSelector" pad-top="0"/>
+    </vertical>
+
+    <vertical pad-top="10">
+        <tab tags="ctrtabs" tab-name="General">
+            <vertical child-control-height="false" child-expand-height="false">
+                <checkbox text="Enabled?" value="enabled" bind-value="true" apply-on-change="true" hover-hint="Enable or disable this mess"/>
+                <string-setting text="React to command" value="commandInitiator" bind-value="true" apply-on-change="true" hover-hint="Start of a message on which CTR will listen and react to, min 2 chars"/>
+                <slider-setting text="Cooldown" value="cooldown" min="1" max="600" increment="1" integer-only="true" show-buttons="true" bind-value="true" apply-on-change="true" hover-hint="Time in seconds on how often CTR can get triggered by the chat or user"/>
+                <checkbox text="Global Cooldown" value="global-cooldown" bind-value="true" apply-on-change="true" hover-hint="If enabled, cooldown is global, otherwise per user, should be left on"/>
+                <checkbox text="Mods can bypass Cooldown" value="modsCanBypassCooldown" bind-value="true" apply-on-change="true" hover-hint="Enable this to let your mods use CTR without any cooldown"/>
+                <checkbox text="Send infos" value="sendInfos" bind-value="true" apply-on-change="true" hover-hint="Send Infos to chat."/>
+                <checkbox text="Add prefix to prevent TTS" value="addPreventChar" bind-value="true" apply-on-change="true" hover-hint="This will add a user specific string in front of every CTR message"/>
+                <string-setting text="String to use:" value="preventChar" bind-value="true" apply-on-change="true" hover-hint="String to use to add in front of every message"/>
+                <horizontal>
+                    <text text="~copy-thingy" align="Center"/>
+                </horizontal>
+            </vertical>
+        </tab>
+
+        <tab tags="ctrtabs" tab-name="Selected Scene">
+            <vertical>
+                <vertical child-control-height="false" child-expand-height="false">
+                    <horizontal>
+                        <text text="~scene-name" align="Center" font-size="5"/>
+                    </horizontal>
+                    <checkbox text="Use Command?" value="scene-use-command" bind-value="true" apply-on-change="true" hover-hint="use text to activate this scene by chat command"/>
+                    <string-setting text="Command" value="scene-command" bind-value="true" apply-on-change="true" hover-hint="command string (get added to the prefix with a space in between)"/>
+                    <horizontal>
+                        <text text="Select where this scene should be available:" align="Center" font-size="4"/>
+                    </horizontal>
+                    <horizontal>
+                        <checkbox pref-width="50" text="Menu" value="scene-for-Menu" bind-value="true" apply-on-change="true"/>
+                        <checkbox pref-width="50" text="Multiplayer Menu" value="scene-for-MultiplayerMenu" bind-value="true" apply-on-change="true"/>
+                    </horizontal>
+                    <horizontal>
+                        <checkbox pref-width="50" text="Playing" value="scene-for-Playing" bind-value="true" apply-on-change="true"/>
+                        <checkbox pref-width="50" text="Playing 360" value="scene-for-Playing360" bind-value="true" apply-on-change="true"/>
+                    </horizontal>
+                    <horizontal>
+                        <checkbox pref-width="50" text="Playing ModMap" value="scene-for-PlayingModMap" bind-value="true" apply-on-change="true"/>
+                        <checkbox pref-width="50" text="Playing Multiplayer" value="scene-for-PlayingMulti" bind-value="true" apply-on-change="true"/>
+                    </horizontal>
+                    <horizontal>
+                        <checkbox pref-width="50" text="Spectating Multiplayer" value="scene-for-SpectatingMulti" bind-value="true" apply-on-change="true"/>
+                        <checkbox pref-width="50" text="Replay" value="scene-for-Replay" bind-value="true" apply-on-change="true"/>
+                    </horizontal>
+                    <horizontal>
+                        <checkbox pref-width="50" text="FPFC" value="scene-for-FPFC" bind-value="true" apply-on-change="true" hover-hint="Does this make any sense?"/>
+                    </horizontal>
+                </vertical>
+            </vertical>
+        </tab>
+    </vertical>
+</bg>
