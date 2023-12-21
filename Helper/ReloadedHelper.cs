@@ -16,8 +16,10 @@ namespace CameraToggleReloaded.Helper
     {
         private static bool? _catCoreInstalled;
         private static bool? _camera2Installed;
+        /*
         private static string? _camera2ScenesConfigFile;
         private static bool _camera2ScenesConfigFileExist;
+        */
 
         public const string DefaultSceneName = "default";
         public static string CurrentScene { get; private set; } = DefaultSceneName;
@@ -94,8 +96,16 @@ namespace CameraToggleReloaded.Helper
             CurrentScene = DefaultSceneName;
         }
 
+        public static void ReloadCamera2()
+        {
+            Camera2.SDK.Scenes.ReloadConfig();
+        }
+        
         public static bool IsAutoSwitchActivated
         {
+            get => Camera2.SDK.Scenes.AutoSwitchFromCustomScene;
+            set => Camera2.SDK.Scenes.AutoSwitchFromCustomScene = value;
+            /*
             get
             {
                 if (_camera2ScenesConfigFile == null)
@@ -103,16 +113,17 @@ namespace CameraToggleReloaded.Helper
                     _camera2ScenesConfigFile = Path.Combine(UnityGame.UserDataPath, "Camera2", "Scenes.json");
                     _camera2ScenesConfigFileExist = File.Exists(_camera2ScenesConfigFile);
                 }
-                
+
                 if (_camera2ScenesConfigFileExist)
                 {
                     var peeker = JsonConvert.DeserializeObject<ReloadedScenePeeker>(File.ReadAllText(_camera2ScenesConfigFile));
                     return peeker.AutoSwitchFromCustom;
                 }
-                
+
                 Plugin.Logger.Error("Scenes.json file missing in Camera2, assuming default value false");
                 return false;
             }
+            */
         }
     }
 }

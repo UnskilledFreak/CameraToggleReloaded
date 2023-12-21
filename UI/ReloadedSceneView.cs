@@ -56,6 +56,13 @@ namespace CameraToggleReloaded.UI
 
             _reloadedMenuView.CurrentSetting = existing;
         }
+        
+        [UIValue("auto-switch")]
+        public bool AutoSwitchFromCustomScene
+        {
+            get => ReloadedHelper.IsAutoSwitchActivated;
+            set => ReloadedHelper.IsAutoSwitchActivated = value;
+        }
 
         [UIAction("re-sync")]
         public void UpdateList(ReloadedSceneSetting? currentSetting = null)

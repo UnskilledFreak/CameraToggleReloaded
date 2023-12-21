@@ -6,7 +6,6 @@
         <custom-list id="ctrScenesList"
                      contents="ctrScenes"
                      show-scrollbar="true"
-                     stick-scrolling="true"
                      select-cell="scene-select"
                      pref-width="80">
             <stack size-delta-x="3">
@@ -19,7 +18,6 @@
             </stack>
         </custom-list>
     </horizontal>
-    <horizontal horizontal-fit="PreferredSize">
-        <button text="Sync Custom Scenes" on-click="re-sync"/>
-    </horizontal>
+    <button text="Sync Custom Scenes" on-click="re-sync"/>
+    <checkbox text="Auto switch from custom Scene" value="auto-switch" bind-value="true" apply-on-change="true" hover-hint="automatically switch from custom scene to default?"/>
 </vertical>

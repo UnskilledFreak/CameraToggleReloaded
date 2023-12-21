@@ -32,6 +32,10 @@ However it is controlled either by you or your chat!
 - [FEFELAND](https://www.twitch.tv/fefeland) for providing many scenes to test with and for general testing
 
 ## Changelog
+- 20231221 - 0.3.0
+  - added auto switch from custom toggle for Camera2
+  - added Camera2 SDK: auto switch from custom
+  - added Camera2 SDK: reload config
 - 20231221 - 0.2.1
   - fixed scene not being toggled twice after menu break when auto switch was enabled on Camera2
   - fixed scene load event was not correctly removed when disposed
