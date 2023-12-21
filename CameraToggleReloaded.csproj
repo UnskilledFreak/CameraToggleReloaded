@@ -125,9 +125,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <Content Include="..\.gitignore">
-      <Link>.gitignore</Link>
-    </Content>
     <Content Include="README.md" />
     <Content Include="SuppressRefereces.targets" />
   </ItemGroup>
